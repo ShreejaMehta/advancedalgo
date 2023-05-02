@@ -58,19 +58,31 @@ public class KruskalAlgorithm {
 
     // Example usage
     public static void main(String[] args) {
-        int n = 5;
-        List<Edge> edges = new ArrayList<>();
-        edges.add(new Edge(0, 1, 2));
-        edges.add(new Edge(0, 3, 6));
-        edges.add(new Edge(1, 2, 3));
+        Scanner scanner = new Scanner(System.in);
 
-        edges.add(new Edge(1, 3, 8));
-        edges.add(new Edge(1, 4, 5));
-        edges.add(new Edge(2, 4, 7));
-        edges.add(new Edge(3, 4, 9));
+        // Take user input for the number of vertices
+        System.out.print("Enter the number of vertices in the graph: ");
+        int n = scanner.nextInt();
+
+        // Take user input for the number of edges and the edges themselves
+        List<Edge> edges = new ArrayList<>();
+        System.out.print("Enter the number of edges in the graph: ");
+        int m = scanner.nextInt();
+        System.out.println("Enter the edges in the format 'source destination weight':");
+        for (int i = 0; i < m; i++) {
+            int source = scanner.nextInt();
+            int destination = scanner.nextInt();
+            int weight = scanner.nextInt();
+            edges.add(new Edge(source, destination, weight));
+        }
+
+        // Call the kruskalAlgorithm method with the user input
         List<Edge> mst = kruskalAlgorithm(n, edges);
         for (Edge edge : mst) {
             System.out.println(edge.source + " - " + edge.destination + ": " + edge.weight);
         }
+
+        // Close the scanner
+        scanner.close();
     }
 }

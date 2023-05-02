@@ -1,5 +1,5 @@
 # Pseucodes 
-
+## Sorting
 ### Insertion Sort
 Recursive
 ``` java
@@ -223,4 +223,152 @@ function heapify(arr, n, i):
         heapify(arr, n, largest)
 
 ```
+## Graph Algos 
 
+### DFS
+``` java
+DFS(adjList, start):
+    visited = array of boolean values, initialized to false
+    dfsUtil(start, visited, adjList)
+
+dfsUtil(v, visited, adjList):
+    visited[v] = true
+    print v
+
+    for adj in adjList[v]:
+        if visited[adj] is false:
+            dfsUtil(adj, visited, adjList)
+```
+Explanation:
+
+- The DFS function takes the adjacency list adjList and the starting vertex start as input.
+-  It initializes the visited array, which keeps track of visited vertices, to all false.
+-  It then calls the dfsUtil function with the starting vertex and the visited array.
+-  The dfsUtil function performs the actual DFS traversal.
+-  It marks the current vertex v as visited by setting visited[v] to true.
+-  It prints the value of the current vertex v.
+-  It then iterates over the adjacent vertices adj of the current vertex.
+-  For each adjacent vertex adj, if it is not visited (visited[adj] is false), it recursively calls dfsUtil on that adjacent vertex.
+### BFS
+``` java
+BFS(adjList, start):
+    visited = array of boolean values, initialized to false
+    queue = empty queue
+
+    visited[start] = true
+    queue.enqueue(start)
+
+    while queue is not empty:
+        v = queue.dequeue()
+        print v
+
+        for adj in adjList[v]:
+            if visited[adj] is false:
+                visited[adj] = true
+                queue.enqueue(adj)
+```
+Explanation:
+
+- The BFS function takes the adjacency list adjList and the starting vertex start as input.
+- It initializes the visited array, which keeps track of visited vertices, to all false.
+- It initializes an empty queue.
+- It marks the starting vertex as visited by setting visited[start] to true.
+- It enqueues the starting vertex into the queue.
+- While the queue is not empty, the loop continues.
+- In each iteration, it dequeues a vertex v from the front of the queue.
+- It prints the value of the dequeued vertex v.
+- It then iterates over the adjacent vertices adj of the dequeued vertex.
+- For each adjacent vertex adj, if it is not visited (visited[adj] is false), it marks it as visited by setting visited[adj] to true and enqueues it into the queue.
+
+### Prims
+``` java
+Prim'sAlgorithm(V, E, edges, startVertex):
+    Initialize an empty adjacency list adjList
+    Initialize an empty priority queue pq
+    Initialize an empty list mstEdges
+    Initialize an empty boolean array visited
+    Initialize mstWeight to 0
+
+    for i in 0 to V-1:
+        Add an empty list to adjList
+
+    for each edge in edges:
+        u, v, weight = edge
+        Add Edge(u, v, weight) to adjList[u]
+        Add Edge(v, u, weight) to adjList[v]
+
+    Visit(startVertex)
+
+    while pq is not empty:
+        e = pq.poll()
+        u = e.u
+        v = e.v
+        if visited[u] and visited[v]:
+            continue
+        Add e to mstEdges
+        mstWeight += e.weight
+        if not visited[u]:
+            Visit(u)
+        if not visited[v]:
+            Visit(v)
+
+    return mstEdges, mstWeight
+
+Visit(vertex):
+    visited[vertex] = true
+    for each edge in adjList[vertex]:
+        if not visited[edge.v]:
+            pq.offer(edge)
+```
+
+### Kruskal's 
+``` java
+KruskalAlgorithm(n, edges):
+    Initialize an empty list mst
+    Create an array parent of size n and initialize each element as its own parent
+
+    Sort the edges in ascending order based on their weights
+
+    for each edge in edges:
+        sourceParent = findParent(edge.source, parent)
+        destinationParent = findParent(edge.destination, parent)
+        if sourceParent is not equal to destinationParent:
+            Add edge to mst
+            Set parent[sourceParent] to destinationParent
+
+    return mst
+
+findParent(node, parent):
+    if parent[node] is not equal to node:
+        Set parent[node] to findParent(parent[node], parent)
+    return parent[node]
+```
+
+### Dijkstra's
+``` java
+Node class:
+    vertex
+    distance
+    
+Dijkstra(graph, start):
+    distances = new Map to store the shortest distances from the start vertex to each vertex
+    pq = new PriorityQueue to keep track of the vertices with their distances
+    visited = new Set to keep track of visited vertices
+
+    Add start vertex to pq with distance 0
+
+    while pq is not empty:
+        node = remove vertex with minimum distance from pq
+
+        if node.vertex is already visited:
+            continue
+
+        Mark node.vertex as visited and store its distance in distances
+
+        for each neighbor in graph[node.vertex]:
+            if neighbor is not visited:
+                newDistance = node.distance + graph[node.vertex][neighbor]
+                Add neighbor to pq with distance newDistance
+
+    Print distances
+```

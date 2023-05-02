@@ -1,7 +1,5 @@
 package com.algos;
-
 import java.util.*;
-
 public class BFS {
 
     // Helper function to perform BFS traversal
@@ -35,15 +33,33 @@ public class BFS {
 
     // Driver code
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the number of vertices
+        System.out.print("Enter the number of vertices: ");
+        int numVertices = scanner.nextInt();
+
         // Create the adjacency list
         Map<Integer, List<Integer>> adjList = new HashMap<>();
-        adjList.put(0, Arrays.asList(1, 2));
-        adjList.put(1, Arrays.asList(2));
-        adjList.put(2, Arrays.asList(0, 3));
-        adjList.put(3, Arrays.asList(3));
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print("Enter the number of adjacent vertices for vertex " + i + ": ");
+            int numAdjacentVertices = scanner.nextInt();
 
-        // Perform BFS traversal starting from vertex 2
-        System.out.println("BFS traversal starting from vertex 2:");
-        bfs(2, adjList);
+            List<Integer> adjacentVertices = new ArrayList<>();
+            System.out.print("Enter the adjacent vertices for vertex " + i + ": ");
+            for (int j = 0; j < numAdjacentVertices; j++) {
+                adjacentVertices.add(scanner.nextInt());
+            }
+
+            adjList.put(i, adjacentVertices);
+        }
+
+        // Get the starting vertex
+        System.out.print("Enter the starting vertex: ");
+        int startVertex = scanner.nextInt();
+
+        // Perform BFS traversal starting from the given vertex
+        System.out.println("BFS traversal starting from vertex " + startVertex + ":");
+        bfs(startVertex, adjList);
     }
 }
