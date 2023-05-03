@@ -30,11 +30,16 @@ function insertionSort(arr)
             j = j - 1
         arr[j + 1] = key
 ```
+#### Mechanism:
+- Insertion sort is a simple comparison-based sorting algorithm.
+- It works by dividing the input array into a sorted and an unsorted region.
+- It iterates over the unsorted region, comparing each element with the elements in the sorted region and inserting it at the appropriate position.
+- The algorithm repeatedly selects the first element from the unsorted region and "inserts" it into the correct position in the sorted region.Recursive
+- This process continues until the entire array is sorted.
 
-### Merge Sort
-
-Recursive
+### Merge Sort 
 ``` java
+
 function mergeSort(arr, left, right)
     if left < right
         mid = (left + right) / 2
@@ -113,6 +118,14 @@ procedure merge(arr, left, mid, right)
         j = j + 1
         k = k + 1
 ```
+
+#### Mechanism:
+- Merge sort is a divide-and-conquer sorting algorithm.
+- It recursively divides the input array into two halves until each subarray has only one element.
+- It then merges the sorted subarrays back together, repeatedly comparing the smallest elements of the two subarrays and adding the smaller element to the merged array.
+- The merging process continues until all subarrays are merged into a single sorted array.
+- Merge sort has a time complexity of O(n log n) in all cases, making it an efficient sorting algorithm.
+
 ### Quick Sort
 Recursive
 ``` java
@@ -164,6 +177,14 @@ procedure quickSort(arr)
             stack.push(pivotIndex + 1)
             stack.push(high)
 ```
+#### Mechanism:
+- Quick sort is a widely used comparison-based sorting algorithm.  
+- It follows the divide-and-conquer approach and uses a pivot element to partition the input array.
+- It selects a pivot element, rearranges the array so that all elements less than the pivot come before it, and all elements greater than the pivot come after it.
+- The algorithm then recursively applies the same process to the subarrays on either side of the pivot.
+- Quick sort has an average-case time complexity of O(n log n), but its worst-case time complexity is O(n^2) when the pivot selection is unbalanced.
+
+
 
 ### Heap Sort 
 Iterative
@@ -223,6 +244,15 @@ function heapify(arr, n, i):
         heapify(arr, n, largest)
 
 ```
+#### Mechanism
+- Heap sort is a comparison-based sorting algorithm that uses a binary heap data structure.
+- It starts by building a max heap or min heap from the input array.
+- The heap can be represented as an array, where the parent nodes are always greater (max heap) or smaller (min heap) than their children.
+- The algorithm repeatedly removes the root element (maximum or minimum) from the heap and places it at the end of the sorted array.
+- After removing the root, the heap property is restored by sifting down the new root element.
+- This process continues until the entire array is sorted.
+- Heap sort has a time complexity of O(n log n) in all cases, making it an efficient sorting algorithm.
+
 ## Graph Algos 
 
 ### DFS
@@ -242,13 +272,19 @@ dfsUtil(v, visited, adjList):
 Explanation:
 
 - The DFS function takes the adjacency list adjList and the starting vertex start as input.
--  It initializes the visited array, which keeps track of visited vertices, to all false.
--  It then calls the dfsUtil function with the starting vertex and the visited array.
--  The dfsUtil function performs the actual DFS traversal.
--  It marks the current vertex v as visited by setting visited[v] to true.
--  It prints the value of the current vertex v.
--  It then iterates over the adjacent vertices adj of the current vertex.
--  For each adjacent vertex adj, if it is not visited (visited[adj] is false), it recursively calls dfsUtil on that adjacent vertex.
+- It initializes the visited array, which keeps track of visited vertices, to all false.
+- It then calls the dfsUtil function with the starting vertex and the visited array.
+- The dfsUtil function performs the actual DFS traversal.
+- It marks the current vertex v as visited by setting visited[v] to true.
+- It prints the value of the current vertex v.
+- It then iterates over the adjacent vertices adj of the current vertex.
+- For each adjacent vertex adj, if it is not visited (visited[adj] is false), it recursively calls dfsUtil on that adjacent vertex. 
+- 
+#### Mechanism:
+- DFS is a graph traversal algorithm that explores vertices as deeply as possible before backtracking.
+- It starts at a given vertex and explores as far as possible along each branch before backtracking.
+- The algorithm uses a stack or recursion to keep track of the visited vertices and the order of exploration.
+- DFS is often used to traverse and search for connected components in graphs.
 ### BFS
 ``` java
 BFS(adjList, start):
@@ -279,6 +315,11 @@ Explanation:
 - It prints the value of the dequeued vertex v.
 - It then iterates over the adjacent vertices adj of the dequeued vertex.
 - For each adjacent vertex adj, if it is not visited (visited[adj] is false), it marks it as visited by setting visited[adj] to true and enqueues it into the queue.
+#### Mechanism:
+- BFS is another graph traversal algorithm that explores vertices in a level-by-level manner, moving outward from the source vertex.
+- It starts at a given vertex and explores all its neighbors before moving to the next level of vertices.
+- The algorithm uses a queue to keep track of the visited vertices and the order of exploration.
+- BFS is often used to find the shortest path between two vertices or to visit all vertices in a connected component.
 
 ### Prims
 ``` java
@@ -320,6 +361,11 @@ Visit(vertex):
         if not visited[edge.v]:
             pq.offer(edge)
 ```
+#### Mechanism:
+- Prim's algorithm is a greedy algorithm used to find the minimum spanning tree (MST) of a weighted undirected graph.
+- It starts with an arbitrary vertex and grows the MST by adding the minimum weight edge that connects the MST to a new vertex.
+- The algorithm maintains two sets of vertices: one set includes the vertices already included in the MST, and the other set includes the remaining vertices.
+- It repeatedly selects the vertex with the minimum edge weight that connects it to the MST and adds it to the MST until all vertices are included.
 
 ### Kruskal's 
 ``` java
@@ -343,8 +389,14 @@ findParent(node, parent):
         Set parent[node] to findParent(parent[node], parent)
     return parent[node]
 ```
+#### Mechanism:    
+- Kruskal's algorithm is also a greedy algorithm used to find the minimum spanning tree of a weighted undirected graph.
+- It starts by sorting all the edges of the graph in ascending order of their weights.
+- The algorithm then considers the edges in this sorted order and adds them to the MST if they do not create a cycle.### Dijkstra's
+- It uses a disjoint-set data structure to keep track of connected components and detect cycles.
+- 
 
-### Dijkstra's
+### Dijkstra's    
 ``` java
 Node class:
     vertex
@@ -372,3 +424,32 @@ Dijkstra(graph, start):
 
     Print distances
 ```
+
+#### Mechanism:
+- Dijkstra's algorithm is a popular algorithm used to find the shortest path from a single source vertex to all other vertices in a weighted graph.
+- It maintains a set of vertices for which the shortest distance from the source vertex has been determined.## Time Complexities 
+- The algorithm assigns a tentative distance value to each vertex, initially setting it to infinity for all vertices except the source vertex.Sorting Algos
+- It repeatedly selects the vertex with the minimum tentative distance and updates the distances of its adjacent vertices if a shorter path is found.
+- The process continues until the shortest path to all vertices has been found.
+
+## Time Complexities
+
+| Algorithm      | Best Case  | Average Case | Worst Case |
+|----------------|------------|--------------|------------|
+| Insertion Sort | O(n)       | O(n^2)       | O(n^2)     |
+| Merge Sort     | O(n log n) | O(n log n)   | O(n log n) |
+| Quick Sort     | O(n log n) | O(n log n)   | O(n^2)     |
+| Heap Sort      | O(n log n) | O(n log n)   | O(n log n) |
+
+Graph Algos 
+| Algorithm | Best Time Complexity | Average Time Complexity | Worst Time Complexity |
+|-----------|----------------------|-------------------------|-----------------------|
+| Prim's    | O(V^2)               | O(V^2)                  | O(V^2)                |
+| Kruskal's | O(E log E)           | O(E log E)              | O(E log E)            |
+| Dijkstra  | O((V + E) log V)     | O((V + E) log V)        | O((V + E) log V)      |
+| DFS       | O(V + E)             | O(V + E)                | O(V + E)              |
+| BFS       | O(V + E)             | O(V + E)                | O(V + E)              |
+
+V = No of vertices 
+E = No of Edges 
+
